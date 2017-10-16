@@ -68,6 +68,14 @@ class SampleApp extends Component {
                         placeholder="Select something yummy!"
                         value={this.state.textInputValue} />
 
+								// Define custom key and label
+                <ModalSelector
+                    data={data}
+										keyProp="id"
+										labelProp="name"
+                    initValue="Select something yummy!"
+                    onChange={(option)=>{ alert(`${option.label} (${option.key}) nom nom nom`) }} />
+
                 </ModalSelector>
             </View>
         );

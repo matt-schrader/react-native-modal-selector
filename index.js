@@ -120,11 +120,21 @@ export default class ModalSelector extends BaseComponent {
         );
     }
 
+    getOptionKey(option) {
+        return this.props.keyProp !== null ? option[this.props.keyProp] : option.key;
+    }
+
+    getOptionLabel(option) {
+        return this.props.labelProp !== null ? option[this.props.labelProp] : option.label;
+    }
+
     renderOption(option) {
         return (
-            <TouchableOpacity key={option.key} onPress={() => this.onChange(option)}>
+            <TouchableOpacity key={this.getOptionKey(option)} onPress={() => this.onChange(option)}>
                 <View style={[styles.optionStyle, this.props.optionStyle]}>
-                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle]}>{option.label}</Text>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle]}>
+                        {this.getOptionLabel(option)}
+                    </Text>
                 </View>
             </TouchableOpacity>);
     }
@@ -135,7 +145,6 @@ export default class ModalSelector extends BaseComponent {
                 return this.renderSection(item);
             }
             return this.renderOption(item);
-
         });
 
         return (
